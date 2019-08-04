@@ -19,10 +19,10 @@ router.get('/register',(req,res)=>{
 
 //register handle
 router.post('/register',(req,res)=>{
-	const {name,email,password,password2}=req.body
+	const {name,email,password,password2,sorc}=req.body
 	let errors=[];
 
-	if(!name||!email||!password||!password2){
+	if(!name||!email||!password||!password2||!sorc){
 		errors.push({msg:'fill all'});
 	}
 	if(password!==password2){
@@ -53,7 +53,8 @@ router.post('/register',(req,res)=>{
 				const newUser = new User({
 					name,
 					email,
-					password
+					password,
+					sorc
 				});
 				//hash pwd
 				bcrypt.genSalt(10,(err,salt)=>{
